@@ -44,49 +44,43 @@
       }
     },
     mounted: function () {
+      
       // 1.操作DOM, 在前后添加Slide
       setTimeout(() => {
         this.handleDom();
 
         // 2.开启定时器
         this.startTimer();
-      }, 100)
+      }, 1000)
     },
     methods: {
-		  /**
-       * 定时器操作
-       */
+
+		  /*** 定时器操作 ***/
       startTimer: function () {
 		    this.playTimer = window.setInterval(() => {
 		      this.currentIndex++;
 		      this.scrollContent(-this.currentIndex * this.totalWidth);
         }, this.interval)
       },
+
       stopTimer: function () {
         window.clearInterval(this.playTimer);
       },
 
-      /**
-       * 滚动到正确的位置
-       */
+      /*** 滚动到正确的位置***/
       scrollContent: function (currentPosition) {
         // 0.设置正在滚动
         this.scrolling = true;
-
         // 1.开始滚动动画
         this.swiperStyle.transition ='transform '+ this.animDuration + 'ms';
         this.setTransform(currentPosition);
-
         // 2.判断滚动到的位置
         this.checkPosition();
-
         // 4.滚动完成
         this.scrolling = false
       },
 
-      /**
-       * 校验正确的位置
-       */
+      /*** 校验正确的位置 ***/
       checkPosition: function () {
         window.setTimeout(() => {
           // 1.校验正确的位置
@@ -98,24 +92,18 @@
             this.currentIndex = this.slideCount;
             this.setTransform(-this.currentIndex * this.totalWidth);
           }
-
           // 2.结束移动后的回调
           this.$emit('transitionEnd', this.currentIndex-1);
         }, this.animDuration)
       },
-
-      /**
-       * 设置滚动的位置
-       */
+      /*** 设置滚动的位置 ***/
       setTransform: function (position) {
         this.swiperStyle.transform = `translate3d(${position}px, 0, 0)`;
         this.swiperStyle['-webkit-transform'] = `translate3d(${position}px), 0, 0`;
         this.swiperStyle['-ms-transform'] = `translate3d(${position}px), 0, 0`;
       },
 
-      /**
-       * 操作DOM, 在DOM前后添加Slide
-       */
+      /*** 操作DOM, 在DOM前后添加Slide***/
 		  handleDom: function () {
         // 1.获取要操作的元素
         let swiperEl = document.querySelector('.swiper');
@@ -183,7 +171,7 @@
         this.startTimer();
       },
 
-      /**
+      /*
        * 控制上一个, 下一个
        */
       previous: function () {

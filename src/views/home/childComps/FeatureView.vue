@@ -5,15 +5,14 @@
     </a>
   </div>
 </template>
-
 <script>
-  export default {
+export default {
     name: "FeatureView"
-  }
+}
 </script>
-
 <style scoped>
-  .feature img {
+.feature img {
     width: 100%;
-  }
+}
+
 </style>

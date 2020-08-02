@@ -25,9 +25,9 @@
 		name: "DetailBaseInfo",
     props: {
 		  goods: {
-		    type: Object,
+        type: Object,
         default() {
-		      return {}
+          return {}
         }
       }
     }
@@ -68,8 +68,6 @@
     background-color: var(--color-high-text);
     border-radius: 8px;
     margin-left: 5px;
-
-    /*让元素上浮一些: 使用相对定位即可*/
     position: relative;
     top: -8px;
   }

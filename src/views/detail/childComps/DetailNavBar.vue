@@ -1,61 +1,63 @@
 <template>
-  <div>
+<div>
     <nav-bar>
-      <div slot="left" class="back" @click="backClick">
-        <img src="~assets/img/common/back.svg" alt="">
-      </div>
-      <div slot="center" class="title">
-        <div v-for="(item, index) in titles"
-             class="title-item"
-             :class="{active: index === currentIndex}"
-             @click="titleClick(index)">
-          {{item}}
+        <div slot="left" class="back" @click="detailBackClick">
+            <img src="~assets/img/common/back.svg">
         </div>
-      </div>
+        <div slot="center" class="title">
+            <div v-for="(item, index) in title" 
+            :key="item" 
+            class="title-item"
+            :class="{active: index === currentIndex}"
+            @click="titleClick(index)"
+            >{{item}}</div>
+        </div>
     </nav-bar>
-  </div>
+
+</div>
+    
 </template>
-
 <script>
-  import NavBar from 'components/common/navbar/NavBar'
-
-  export default {
-    name: "DetailNavBar",
-    components: {
-      NavBar
-    },
+import NavBar from 'components/common/navbar/NavBar'
+export default {
     data() {
-      return {
-        titles: ['商品', '参数', '评论', '推荐'],
-        currentIndex: 0
-      }
+        return {
+            title:['商品','参数','评论','推荐'],
+            currentIndex: 0
+        }
+    },
+    components: {
+        NavBar
+
     },
     methods: {
-      titleClick(index) {
-        this.currentIndex = index
-      },
-      backClick() {
-        this.$router.back()
-      }
-    }
-  }
-</script>
+        //获取当前点击导航栏的索引值
+        titleClick(index) {
+            this.currentIndex = index
 
+        },
+        detailBackClick() {
+            this.$router.back()
+        }
+
+    }
+    
+}
+</script>
 <style scoped>
-  .title {
+.title {
     display: flex;
     font-size: 13px;
-  }
-
-  .title-item {
+}
+.title-item {
     flex: 1;
-  }
+}
+.active {
+    color: var(--color-high-text);
 
-  .active {
-    color: var(--color-high-text)
-  }
+}
+.back img{
+    margin-top: 11PX;
+}
 
-  .back img {
-    margin-top: 12px;
-  }
 </style>

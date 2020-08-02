@@ -1,38 +1,55 @@
 <template>
-  <div class="goods-item" @click="itemClick">
-    <img :src="goodsItem.show.img" alt="" @load="imageLoad">
+<div class="goods-item">
+    <!-- <img :src="goodsItem.show.img">
+    <div>
+        <p>{{goodsItem.title}}</p>
+        <span>{{goodsItem.price}}</span>
+        <span>{{goodsItem.cfav}}</span>
+
+    </div> -->
+
+    <img :src="showImage" alt="" @load="imageLoad" @click="itemClick">
     <div class="goods-info">
       <p>{{goodsItem.title}}</p>
       <span class="price">{{goodsItem.price}}</span>
       <span class="collect">{{goodsItem.cfav}}</span>
     </div>
-  </div>
-</template>
 
+</div>
+    
+</template>
 <script>
-  export default {
+export default {
     name: "GoodsListItem",
     props: {
-      goodsItem: {
-        type: Object,
-        default() {
-          return {}
+        goodsItem:{
+             type: Object,
+             default() {
+                return {
+                  
+                }
+            }
+        }    
+    },
+    computed: {
+        showImage() {
+            return this.goodsItem.img || this.goodsItem.image || this.goodsItem.show.img
         }
-      }
     },
     methods: {
-      imageLoad() {
-        this.$bus.$emit('itemImageLoad')
-      },
-      itemClick() {
-        this.$router.push('/detail/' + this.goodsItem.iid)
-      }
-    }
-  }
-</script>
+       imageLoad() {
+          this.$bus.$emit('itemImageLoad')
+        },
+       itemClick() {
+         this.$router.push('/detail/' + this.goodsItem.iid)
+       }
+    },
+    
 
+}
+</script>
 <style scoped>
-  .goods-item {
+ .goods-item {
     padding-bottom: 40px;
     position: relative;
 
@@ -79,4 +96,5 @@
     height: 14px;
     background: url("~assets/img/common/collect.svg") 0 0/14px 14px;
   }
+
 </style>
